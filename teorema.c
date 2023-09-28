@@ -1,12 +1,44 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+int primo(int num) {
+    if (num < 2)
+        return 0;
 
-int main(int argc, char *argv[]) {
-	int v[4]n1 = //colocar a formula aqui(provavelmente usando laço de repetição aqui dentro).
-	printf("Todo inteiro par maior que 2 pode ser escrito como a soma de 2 numeros primos.\n");
-	printf("de acordo com esse teorema, digite quatro numeros inteiros maiores que 2 que seja unidade, e o programa ira mostrar uma soma de numeros primos que correspondera a esse mesmo número.\n ");
-	scanf("%i", &n1);
-	return 0;
+    for (int i = 2; i * i <= num; i++) {
+        if (num % i == 0)
+            return 0;
+    }
+
+    return 1;
+}
+
+void goldbach_sum(int num) {
+    if (num < 4 || num % 2 != 0) {
+        printf("Por favor, insira um numero inteiro par maior que 2.\n");
+        return;
+    }
+
+    printf("Soma de dois numeros primos para %d:\n", num);
+
+    for (int i = 2; i <= num / 2; i++) {
+        if (primo(i) && primo(num - i)) {
+            printf("%d + %d = %d\n", i, num - i, num);
+        }
+    }
+}
+
+int main() {
+    int n;
+
+    printf("Digite quatro numeros inteiros pares maiores que 2:\n");
+
+    for (int i = 0; i < 4; i++) {
+        printf("Numero %d: ", i + 1);
+        scanf("%d", &n);
+        goldbach_sum(n);
+        printf("\n");
+    }
+
+    return 0;
 }
